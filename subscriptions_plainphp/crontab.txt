@@ -1,0 +1,10 @@
+* * * * *  flock -xn /tmp/queue_fill.lock -c 'php /var/www/sefvice/current/console/fill_notifications_queue/subscription_ends.php 1 >> /var/log/fill_notifications_queue.log 2>&1'
+* * * * *  flock -xn /tmp/queue_fill.lock -c 'php /var/www/sefvice/current/console/fill_notifications_queue/subscription_ends.php 3 >> /var/log/fill_notifications_queue.log 2>&1'
+
+* * * * *  flock -xn /tmp/validate_notifications_queue.lock -c 'php /var/www/sefvice/current/console/validate_notifications_queue.php >> /var/log/validate_notifications_queue.log 2>&1'
+
+* * * * *  flock -xn /tmp/send_from_queue.lock -c 'php /var/www/sefvice/current/console/send_from_queue.php  >> /var/log/send_from_queue.log 2>&1'
+
+* * * * *  flock -xn /tmp/clean_queue.lock -c 'php /var/www/sefvice/current/console/clean_queue.php >> /var/log/clean_queue.log 2>&1'
+
+

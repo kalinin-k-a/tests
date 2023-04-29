@@ -1,0 +1,23 @@
+SQL
+alter table users create index if not exists on (validts); 
+alter table users add column id unsigned int not null promary key;
+
+
+DELIMITER %
+CREATE TRIGGER trigger_name BEFORE INSERT 
+ON users 
+BEGIN 
+ new.checked = new.checker or new.confirmed; -- типа если юзер подтвердил почту, то она живая, пометим сразу, чтоб потом не дергать дорогую функцию check_email
+END
+DELIMITER ;
+-- и такой же before update
+
+create table notifications_queue (
+	user_id unsigned int not null,
+	email varchar(),
+	notification_id int unsigned,
+	status enum('new', 'validated', 'sent') default 'new',
+	added_at datetime default now(),
+)
+alter table notifications_queue create index if not exists on (status); 
+alter table notifications_queue create unique index if not exists on (user_id, notification_id); 
